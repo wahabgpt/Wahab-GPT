@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WahabGPT — Coding AI</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+
+                <div>
+                    <h1>WahabGPT</h1>
+                    <span>Coding AI</span>
+                </div>
+            </div>
+
+            <button class="new-chat" id="newChatBtn">
+                <i class="fa-solid fa-plus"></i>
+                <span>New Chat</span>
+            </button>
+
+            <nav class="menu">
+
+                <div class="menu-title">WORKSPACE</div>
+
+                <button class="menu-item active">
+                    <i class="fa-regular fa-message"></i>
+                    <span>Chat AI</span>
+                </button>
+
+                <button class="menu-item">
+                    <i class="fa-solid fa-code"></i>
+                    <span>Code</span>
+                </button>
+
+                <button class="menu-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>Training</span>
+                </button>
+
+                <button class="menu-item">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <span>Projects</span>
+                </button>
+
+                <div class="menu-title recent-title">RECENT</div>
+
+                <button class="recent-chat">
+                    <i class="fa-regular fa-message"></i>
+                    <span>Website AI</span>
+                </button>
+
+                <button class="recent-chat">
+                    <i class="fa-regular fa-message"></i>
+                    <span>Login Page</span>
+                </button>
+
+                <button class="recent-chat">
+                    <i class="fa-regular fa-message"></i>
+                    <span>Portfolio</span>
+                </button>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <button class="menu-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </button>
+
+                <div class="model-card">
+
+                    <div class="model-dot"></div>
+
+                    <div class="model-info">
+                        <strong>WahabGPT</strong>
+                        <span>Local AI Model</span>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN ================= -->
+        <main class="main">
+
+            <!-- HEADER -->
+            <header class="topbar">
+
+                <button class="mobile-menu" id="mobileMenu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="page-title">
+                    <strong>WahabGPT</strong>
+                    <span>AI Coding Assistant</span>
+                </div>
+
+                <div class="top-actions">
+
+                    <div class="online">
+                        <span></span>
+                        AI Online
+                    </div>
+
+                    <button class="icon-button">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+
+                    <button class="icon-button">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- CHAT AREA -->
+            <section class="chat-area" id="chatArea">
+
+                <!-- WELCOME -->
+                <div class="welcome" id="welcome">
+
+                    <div class="ai-orb">
+
+                        <div class="orb-ring ring-one"></div>
+                        <div class="orb-ring ring-two"></div>
+
+                        <div class="orb-core">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+
+                    </div>
+
+                    <h2>
+                        What can I build
+                        <span>for you?</span>
+                    </h2>
+
+                    <p>
+                        I'm WahabGPT, your AI coding assistant.
+                        Ask me to create, fix or explain code.
+                    </p>
+
+                    <!-- QUICK ACTIONS -->
+                    <div class="quick-actions">
+
+                        <button data-prompt="Create a responsive website using HTML CSS and JavaScript">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Generate Code</span>
+                        </button>
+
+                        <button data-prompt="Find and fix the errors in my code">
+                            <i class="fa-solid fa-bug"></i>
+                            <span>Fix Code</span>
+                        </button>
+
+                        <button data-prompt="Explain this code in simple words">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span>Explain Code</span>
+                        </button>
+
+                        <button data-prompt="Improve my website code">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Improve Code</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGES -->
+                <div class="messages" id="messages"></div>
+
+            </section>
+
+
+            <!-- INPUT AREA -->
+            <section class="composer-wrapper">
+
+                <div class="composer">
+
+                    <button class="attach-button" title="Attach">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </button>
+
+                    <textarea
+                        id="messageInput"
+                        placeholder="Ask WahabGPT to build something..."
+                        rows="1"></textarea>
+
+                    <div class="composer-actions">
+
+                        <button class="tool-button" title="Code">
+                            <i class="fa-solid fa-code"></i>
+                        </button>
+
+                        <button class="send-button" id="sendButton">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <p class="disclaimer">
+                    WahabGPT can make mistakes. Check important code before using it.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+# Ollama / AI model files
+*.gguf
+*.bin
+*.safetensors
+models/
+model/
+ollama/
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store
