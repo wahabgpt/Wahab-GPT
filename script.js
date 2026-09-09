@@ -984,3 +984,34 @@ document.addEventListener(
 
     }
 );
+/* =========================================================
+   SPECIAL REPLIES - BINA AI KE
+   ========================================================= */
+
+function getSpecialReply(message) {
+    const msg = message.toLowerCase().trim();
+    
+    // 📋 YAHAN APNI REPLIES DALO
+    const replies = {
+        "hello": `👋 Assalamu Alaikum bhai!<br><br>WahabGPT yahan hai.<br>Kya help chahiye?<br><br><button onclick="copyText(this)" class="copy-btn">📋 Copy</button>`,
+        
+        "bye": `🤝 Allah Hafiz bhai!<br><br>Phir milte hain.<br><br><button onclick="copyText(this)" class="copy-btn">📋 Copy</button>`,
+        
+        "thanks": `🙏 Shukriya bhai!<br><br>Koi aur help chahiye toh batao.<br><br><button onclick="copyText(this)" class="copy-btn">📋 Copy</button>`,
+        
+        "who are you": `🤖 My name is WahabGPT.<br><br>Created by Abdul Wahab Badar.<br>Running locally on Ollama (qwen2.5:0.5b).<br><br><button onclick="copyText(this)" class="copy-btn">📋 Copy</button>`,
+        
+        "time": `🕐 ${new Date().toLocaleTimeString()}<br><br><button onclick="copyText(this)" class="copy-btn">📋 Copy</button>`,
+        
+        "date": `📅 ${new Date().toLocaleDateString()}<br><br><button onclick="copyText(this)" class="copy-btn">📋 Copy</button>`
+    };
+    
+    // Check karo ke message match karta hai?
+    for (let [key, reply] of Object.entries(replies)) {
+        if (msg.includes(key) || msg === key) {
+            return reply;
+        }
+    }
+    
+    return null; // Koi special reply nahi mila
+}
