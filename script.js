@@ -9,7 +9,7 @@
    CONFIGURATION
    ========================================================= */
 
-const OLLAMA_URL = "https://contacted-raised-deeply-behind.trycloudflare.com/api/chat";
+const OLLAMA_URL = "https://reports-corps-backgrounds-returning.trycloudflare.com/api/chat";
 const OLLAMA_MODEL = "qwen2.5:0.5b";
 
 /*
