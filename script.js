@@ -9,7 +9,7 @@
    CONFIGURATION
    ========================================================= */
 
-const OLLAMA_URL = "http://127.0.0.1:11434/api/chat";
+const OLLAMA_URL = "https://contacted-raised-deeply-behind.trycloudflare.com/api/chat";
 const OLLAMA_MODEL = "qwen2.5:0.5b";
 
 /*
