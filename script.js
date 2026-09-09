@@ -5,7 +5,10 @@
    LOCAL OLLAMA AI
    ========================================================= */
 
-const OLLAMA_URL = "https://specifically-aimed-skip-governments.trycloudflare.com/api/chat";
+const OLLAMA_URLS = [
+    "http://127.0.0.1:11434/api/chat",
+    "https://appraisal-unwrap-existence-steel.trycloudflare.com//api/chat"
+];
 const OLLAMA_MODEL = "qwen2.5:0.5b";
 
 
