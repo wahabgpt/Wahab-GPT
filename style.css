@@ -1061,4 +1061,123 @@ body {
         font-size: 12px;
     }
 
+}/* =========================================================
+   TYPING INDICATOR ANIMATIONS
+   ========================================================= */
+
+.typing-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.typing-text {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+    animation: textPulse 1.5s ease-in-out infinite;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.dot {
+    font-size: 14px;
+    color: #4f46e5;
+    animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.dot-1 { animation-delay: 0s; }
+.dot-2 { animation-delay: 0.2s; }
+.dot-3 { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+        color: #4f46e5;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+        color: #7c3aed;
+    }
+}
+
+@keyframes textPulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Professional Wave Animation Alternative */
+.typing-wave {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.wave-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4f46e5;
+    animation: wave 1.2s ease-in-out infinite;
+}
+
+.wave-dot:nth-child(1) { animation-delay: 0s; }
+.wave-dot:nth-child(2) { animation-delay: 0.2s; }
+.wave-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes wave {
+    0%, 40%, 100% {
+        transform: scale(0.4);
+        opacity: 0.3;
+    }
+    20% {
+        transform: scale(1);
+        opacity: 1;
+        background: #7c3aed;
+    }
+}
+
+/* Gradient Loading Animation */
+.typing-gradient {
+    height: 4px;
+    width: 60px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed, #4f46e5);
+    background-size: 200% 100%;
+    animation: gradientMove 1.5s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Responsive Typing */
+@media (max-width: 640px) {
+    .typing-text {
+        font-size: 12px;
+    }
+    
+    .dot {
+        font-size: 12px;
+    }
+    
+    .typing-dots {
+        gap: 4px;
+    }
 }
