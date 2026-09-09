@@ -1604,7 +1604,38 @@ if (sidebar) {
             );
         });
 }
+/* =========================================================
+   TYPING INDICATOR WITH ANIMATION
+   ========================================================= */
 
+function showTyping() {
+
+    removeTyping();
+
+    const typing = document.createElement("div");
+    typing.className = "message ai typing-message";
+    typing.id = "typingIndicator";
+
+    typing.innerHTML = `
+        <div class="avatar">
+            <i class="fa-solid fa-robot"></i>
+        </div>
+
+        <div class="message-content">
+            <div class="typing-container">
+                <div class="typing-text">WahabGPT is thinking</div>
+                <div class="typing-dots">
+                    <span class="dot dot-1">●</span>
+                    <span class="dot dot-2">●</span>
+                    <span class="dot dot-3">●</span>
+                </div>
+            </div>
+        </div>
+    `;
+
+    messages.appendChild(typing);
+    scrollToBottom();
+}
 
 /* =========================================================
    INITIAL SETUP
