@@ -201,6 +201,88 @@ async function getAIResponse(userMessage) {
 
     const database = await loadDatabase();
 
+    const q = userMessage
+        .toLowerCase()
+        .trim();
+
+    /*
+       PERSONAL DATABASE ANSWERS
+    */
+
+    if (
+        q.includes("what is my name") ||
+        q.includes("what's my name") ||
+        q.includes("mera naam kya hai") ||
+        q.includes("mera name kya hai")
+    ) {
+        const name = database?.user?.name || "Abdul Wahab Badar";
+        return `Tumhara naam ${name} hai.`;
+    }
+
+    if (
+        q.includes("what should you call me") ||
+        q.includes("what do you call me") ||
+        q.includes("call me what") ||
+        q.includes("mujhe kya bulao") ||
+        q.includes("mujhe kis naam se bulao")
+    ) {
+        const name =
+            database?.user?.preferred_name ||
+            "Wahab";
+
+        return `Main tumhein ${name} bulaunga.`;
+    }
+
+    if (
+        q.includes("what is my ai") ||
+        q.includes("what is my ai's name") ||
+        q.includes("what is the name of my ai") ||
+        q.includes("my ai name") ||
+        q.includes("meri ai ka naam")
+    ) {
+        const aiName =
+            database?.identity?.ai_name ||
+            "WahabGPT";
+
+        return `Tumhari AI ka naam ${aiName} hai.`;
+    }
+
+    if (
+        q.includes("who created wahabgpt") ||
+        q.includes("who created you") ||
+        q.includes("who is your creator") ||
+        q.includes("tumhein kis ne banaya") ||
+        q.includes("tumhara creator kon hai")
+    ) {
+        const creator =
+            database?.identity?.creator ||
+            "Abdul Wahab Badar";
+
+        return `WahabGPT ko ${creator} ne banaya hai.`;
+    }
+
+    if (
+        q.includes("what is abdul wahab badar") ||
+        q.includes("who is abdul wahab badar") ||
+        q.includes("abdul wahab badar kon hai") ||
+        q.includes("abdul wahab badar kaun hai")
+    ) {
+        const name =
+            database?.user?.name ||
+            "Abdul Wahab Badar";
+
+        const status =
+            database?.user?.status ||
+            "student";
+
+        return `${name} user hain. Woh ${status} hain aur WahabGPT ke creator bhi hain.`;
+    }
+
+
+    /*
+       NORMAL AI CHAT
+    */
+
     conversationHistory.push({
         role: "user",
         content: userMessage
@@ -224,20 +306,17 @@ async function getAIResponse(userMessage) {
             content: `
 PERSONAL DATABASE
 
-This database contains information about Abdul Wahab Badar.
-
-Use this database as the ONLY source of truth for personal information.
-
 ${databaseContext}
 
-IMPORTANT DATABASE INSTRUCTIONS:
-- The user's name is stored in database.user.name.
-- The preferred name is stored in database.user.preferred_name.
-- The AI name is WahabGPT.
-- The creator is Abdul Wahab Badar.
-- Do not invent information.
-- Do not guess information.
-- If information is missing, say it is not available in the database.
+IMPORTANT:
+- Abdul Wahab Badar is the USER.
+- Wahab is the user's preferred name.
+- WahabGPT is the AI.
+- Abdul Wahab Badar is the creator of WahabGPT.
+- NEVER say Abdul Wahab Badar is the AI.
+- NEVER confuse the user with the AI.
+- NEVER invent personal information.
+- If personal information is not in the database, say it is not available.
 `
         },
 
@@ -322,16 +401,12 @@ IMPORTANT DATABASE INSTRUCTIONS:
     }
 
     conversationHistory.push({
-
         role: "assistant",
-
         content: aiText
-
     });
 
     return aiText.trim();
 }
-
 /* =========================================================
    ADD MESSAGE
    ========================================================= */
