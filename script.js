@@ -5,10 +5,7 @@
    LOCAL OLLAMA AI
    ========================================================= */
 
-const OLLAMA_URLS = [
-    "http://127.0.0.1:3000/api/chat",
-    "http://localhost:3000/api/chat"
-];
+const OLLAMA_URL = "http://127.0.0.1:11434/api/chat";
 const OLLAMA_MODEL = "qwen2.5:0.5b";
 
 
