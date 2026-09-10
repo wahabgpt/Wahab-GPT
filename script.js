@@ -14,69 +14,132 @@ const OLLAMA_MODEL = "qwen2.5:0.5b";
    ========================================================= */
 
 const SYSTEM_PROMPT = `
-You are WahabGPT.
+You are WahabGPT, a personal AI assistant.
 
 IDENTITY
-- Your AI name is WahabGPT.
-- The user's name is Abdul Wahab Badar.
-- The user can also be called Wahab.
-- Your creator is Abdul Wahab Badar.
-- You are a local AI assistant powered by Ollama.
-- Model: qwen2.5:0.5b.
+- AI name: WahabGPT
+- User name: Abdul Wahab Badar
+- User preferred name: Wahab
+- Creator of WahabGPT: Abdul Wahab Badar
+- You are powered by Ollama.
+- Model: qwen2.5:0.5b
 
-IMPORTANT
-- WahabGPT is the AI name.
-- Abdul Wahab Badar is the user's name.
-- NEVER confuse the AI name with the user's name.
-- If the user asks "What is my name?", use the PERSONAL DATABASE.
-- If the user asks "What should you call me?", use the PERSONAL DATABASE.
-- If the user asks "What is my AI's name?", answer WahabGPT.
-- If the user asks "Who created you?", answer Abdul Wahab Badar.
+DATABASE REASONING
+A PERSONAL DATABASE is provided to you with every request.
 
-DATABASE RULES
-- A PERSONAL DATABASE is provided separately.
-- The PERSONAL DATABASE is the source of truth for information about the user.
-- Always use the database when answering questions about the user.
-- NEVER invent personal information.
-- NEVER guess personal information.
-- NEVER create fake projects, skills, education, interests or goals.
-- If information is not in the database, say that the information is not available in the database.
+You must READ and UNDERSTAND the database before answering questions
+about the user.
+
+The database is the source of truth.
+
+When the user asks something about themselves:
+1. Find the relevant information in the database.
+2. Understand what the information means.
+3. Use the relevant fields to form the answer.
+4. Answer naturally.
+5. Do not mention internal database paths unless useful.
+6. Do not invent information.
+7. Do not guess missing information.
+8. Do not confuse the user with the AI.
+9. Do not confuse Abdul Wahab Badar with WahabGPT.
+
+IMPORTANT IDENTITY RULES
+- Abdul Wahab Badar = the user and creator.
+- Wahab = user's preferred name.
+- WahabGPT = the AI.
+- Never say the user's name is WahabGPT.
+- Never say Abdul Wahab Badar is the AI.
+- If information is not present in the database, say you do not have that information.
+
+REASONING EXAMPLES
+
+If the database says:
+user.name = Abdul Wahab Badar
+then:
+"What is my name?"
+means the user's name, so answer Abdul Wahab Badar.
+
+If the database says:
+user.preferred_name = Wahab
+then:
+"What should you call me?"
+means the preferred name, so answer Wahab.
+
+If the database says:
+identity.ai_name = WahabGPT
+then:
+"What is my AI's name?"
+means the AI name, so answer WahabGPT.
+
+If the database says:
+identity.creator = Abdul Wahab Badar
+then:
+"Who created WahabGPT?"
+means the creator, so answer Abdul Wahab Badar.
+
+If the database contains projects.major,
+and the user asks about their projects,
+use the projects stored there.
+
+If the database contains education,
+and the user asks about education,
+use the education information stored there.
+
+If the database contains skills,
+interests, learning_goals, coding_preferences or future_goals,
+use those fields when relevant.
 
 LANGUAGE
-- Understand Roman Urdu.
-- Understand Urdu.
 - Understand English.
+- Understand Urdu.
+- Understand Roman Urdu.
 - Understand Hinglish.
-- Understand spelling mistakes and informal messages.
+- Understand informal spelling.
+- Respond naturally in the user's language.
+- If the user writes Roman Urdu, prefer Roman Urdu.
+- If the user writes English, prefer English.
 
 CODING
 - Help with HTML, CSS and JavaScript.
-- When the user asks for code, give working code.
-- Understand commands such as:
-  "10 div bana do"
-  "button red kar do"
-  "header ka color change karo"
-- Preserve the user's existing project structure.
+- Understand beginner coding requests.
+- Give working code.
+- Preserve existing project structure.
 - Do not remove existing functionality unless requested.
+- If the user asks for a complete file, provide the complete file.
 
-RESPONSE
-- Keep simple questions short.
-- For coding problems, explain briefly and provide the required code.
-- If the user asks for a complete file, provide the complete replacement file.
+RESPONSE STYLE
+- Simple.
+- Direct.
+- Friendly.
+- Do not make unnecessary long explanations.
+- Do not invent personal information.
 `;
+
 
 /* =========================================================
    DOM ELEMENTS
    ========================================================= */
 
-const messageInput = document.getElementById("messageInput");
-const sendButton = document.getElementById("sendButton");
-const messages = document.getElementById("messages");
-const welcome = document.getElementById("welcome");
+const messageInput =
+    document.getElementById("messageInput");
 
-const newChatBtn = document.getElementById("newChatBtn");
-const mobileMenu = document.getElementById("mobileMenu");
-const sidebar = document.querySelector(".sidebar");
+const sendButton =
+    document.getElementById("sendButton");
+
+const messages =
+    document.getElementById("messages");
+
+const welcome =
+    document.getElementById("welcome");
+
+const newChatBtn =
+    document.getElementById("newChatBtn");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const sidebar =
+    document.querySelector(".sidebar");
 
 
 /* =========================================================
@@ -84,10 +147,18 @@ const sidebar = document.querySelector(".sidebar");
    ========================================================= */
 
 let conversationHistory = [];
+
 let DATABASE = null;
+
 let databasePromise = null;
 
+
+/* =========================================================
+   LOAD DATABASE
+   ========================================================= */
+
 async function loadDatabase() {
+
     if (databasePromise) {
         return databasePromise;
     }
@@ -96,29 +167,74 @@ async function loadDatabase() {
         cache: "no-store"
     })
     .then(async response => {
+
         if (!response.ok) {
+
             throw new Error(
                 `Database load failed: HTTP ${response.status}`
             );
         }
 
-        const text = await response.text();
+        const text =
+            await response.text();
 
-        DATABASE = JSON.parse(text);
+        try {
 
-        console.log("✅ DATABASE LOADED");
-        console.log(DATABASE);
+            DATABASE =
+                JSON.parse(text);
+
+        } catch (error) {
+
+            throw new Error(
+                "Database JSON invalid hai."
+            );
+        }
+
+        console.log(
+            "✅ DATABASE LOADED"
+        );
+
+        console.log(
+            "📚 DATABASE:",
+            DATABASE
+        );
 
         return DATABASE;
+
     })
     .catch(error => {
-        console.error("❌ DATABASE ERROR:", error);
+
+        console.error(
+            "❌ DATABASE ERROR:",
+            error
+        );
+
         DATABASE = {};
+
         return DATABASE;
     });
 
     return databasePromise;
 }
+
+
+/* =========================================================
+   CREATE DATABASE CONTEXT
+   ========================================================= */
+
+function createDatabaseContext(database) {
+
+    if (!database || typeof database !== "object") {
+        return "{}";
+    }
+
+    return JSON.stringify(
+        database,
+        null,
+        2
+    );
+}
+
 
 /* =========================================================
    SEND MESSAGE
@@ -130,9 +246,10 @@ async function sendMessage(text = null) {
         return;
     }
 
-    const message = text !== null
-        ? String(text).trim()
-        : messageInput.value.trim();
+    const message =
+        text !== null
+            ? String(text).trim()
+            : messageInput.value.trim();
 
     if (!message) {
         return;
@@ -142,10 +259,15 @@ async function sendMessage(text = null) {
         welcome.style.display = "none";
     }
 
-    addMessage("user", escapeHTML(message));
+    addMessage(
+        "user",
+        escapeHTML(message)
+    );
 
     if (messageInput) {
+
         messageInput.value = "";
+
         autoResize();
     }
 
@@ -155,19 +277,27 @@ async function sendMessage(text = null) {
 
     try {
 
-        const aiResponse = await getAIResponse(message);
+        const aiResponse =
+            await getAIResponse(message);
 
         removeTyping();
 
-        await typeAIMessage(aiResponse);
+        await typeAIMessage(
+            aiResponse
+        );
 
     } catch (error) {
 
-        console.error("WahabGPT Error:", error);
+        console.error(
+            "WahabGPT Error:",
+            error
+        );
 
         removeTyping();
 
-        let errorMessage = error.message || "Unknown error";
+        const errorMessage =
+            error.message ||
+            "Unknown error";
 
         addMessage(
             "ai",
@@ -197,102 +327,84 @@ async function sendMessage(text = null) {
 /* =========================================================
    GET AI RESPONSE
    ========================================================= */
+
 async function getAIResponse(userMessage) {
 
-    const database = await loadDatabase();
+    const database =
+        await loadDatabase();
 
-    const q = userMessage
-        .toLowerCase()
-        .trim();
-
-    /*
-       PERSONAL DATABASE ANSWERS
-    */
-
-    if (
-        q.includes("what is my name") ||
-        q.includes("what's my name") ||
-        q.includes("mera naam kya hai") ||
-        q.includes("mera name kya hai")
-    ) {
-        const name = database?.user?.name || "Abdul Wahab Badar";
-        return `Tumhara naam ${name} hai.`;
-    }
-
-    if (
-        q.includes("what should you call me") ||
-        q.includes("what do you call me") ||
-        q.includes("call me what") ||
-        q.includes("mujhe kya bulao") ||
-        q.includes("mujhe kis naam se bulao")
-    ) {
-        const name =
-            database?.user?.preferred_name ||
-            "Wahab";
-
-        return `Main tumhein ${name} bulaunga.`;
-    }
-
-    if (
-        q.includes("what is my ai") ||
-        q.includes("what is my ai's name") ||
-        q.includes("what is the name of my ai") ||
-        q.includes("my ai name") ||
-        q.includes("meri ai ka naam")
-    ) {
-        const aiName =
-            database?.identity?.ai_name ||
-            "WahabGPT";
-
-        return `Tumhari AI ka naam ${aiName} hai.`;
-    }
-
-    if (
-        q.includes("who created wahabgpt") ||
-        q.includes("who created you") ||
-        q.includes("who is your creator") ||
-        q.includes("tumhein kis ne banaya") ||
-        q.includes("tumhara creator kon hai")
-    ) {
-        const creator =
-            database?.identity?.creator ||
-            "Abdul Wahab Badar";
-
-        return `WahabGPT ko ${creator} ne banaya hai.`;
-    }
-
-    if (
-        q.includes("what is abdul wahab badar") ||
-        q.includes("who is abdul wahab badar") ||
-        q.includes("abdul wahab badar kon hai") ||
-        q.includes("abdul wahab badar kaun hai")
-    ) {
-        const name =
-            database?.user?.name ||
-            "Abdul Wahab Badar";
-
-        const status =
-            database?.user?.status ||
-            "student";
-
-        return `${name} user hain. Woh ${status} hain aur WahabGPT ke creator bhi hain.`;
-    }
+    const databaseContext =
+        createDatabaseContext(database);
 
 
     /*
-       NORMAL AI CHAT
+       Save user message
     */
 
     conversationHistory.push({
+
         role: "user",
+
         content: userMessage
+
     });
 
-    const databaseContext = JSON.stringify(
-        database,
-        null,
-        2
-    );
+
+    /*
+       Give database to AI
+    */
+
+    const databaseMessage = `
+PERSONAL DATABASE
+=================
+
+${databaseContext}
+
+=================
+
+DATABASE REASONING INSTRUCTION
+
+Read the database above carefully.
+
+The database contains information about the user,
+the AI, projects, education, skills, interests,
+learning goals and other personal information.
+
+When answering a personal question:
+
+- Find the relevant information.
+- Understand its meaning.
+- Connect related fields when necessary.
+- Answer using the database.
+- Never invent information.
+- Never guess missing information.
+
+IDENTITY:
+
+User:
+Abdul Wahab Badar
+
+Preferred name:
+Wahab
+
+AI:
+WahabGPT
+
+Creator:
+Abdul Wahab Badar
+
+Remember:
+
+Abdul Wahab Badar is the USER.
+WahabGPT is the AI.
+
+Never confuse them.
+`;
+
+
+    /*
+       API messages
+    */
 
     const apiMessages = [
 
@@ -303,53 +415,54 @@ async function getAIResponse(userMessage) {
 
         {
             role: "system",
-            content: `
-PERSONAL DATABASE
-
-${databaseContext}
-
-IMPORTANT:
-- Abdul Wahab Badar is the USER.
-- Wahab is the user's preferred name.
-- WahabGPT is the AI.
-- Abdul Wahab Badar is the creator of WahabGPT.
-- NEVER say Abdul Wahab Badar is the AI.
-- NEVER confuse the user with the AI.
-- NEVER invent personal information.
-- If personal information is not in the database, say it is not available.
-`
+            content: databaseMessage
         },
 
         ...conversationHistory
+
     ];
+
+
+    /*
+       Send to Ollama
+    */
 
     let response;
 
     try {
 
-        response = await fetch(
-            OLLAMA_URL,
-            {
-                method: "POST",
+        response =
+            await fetch(
+                OLLAMA_URL,
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
+                    body: JSON.stringify({
 
-                    model: OLLAMA_MODEL,
+                        model:
+                            OLLAMA_MODEL,
 
-                    messages: apiMessages,
+                        messages:
+                            apiMessages,
 
-                    stream: false,
+                        stream: false,
 
-                    options: {
-                        temperature: 0.2
-                    }
-                })
-            }
-        );
+                        options: {
+
+                            temperature: 0.15,
+
+                            top_p: 0.8
+
+                        }
+
+                    })
+                }
+            );
 
     } catch (error) {
 
@@ -358,13 +471,22 @@ IMPORTANT:
         );
     }
 
+
+    /*
+       API error
+    */
+
     if (!response.ok) {
 
         let serverError = "";
 
         try {
-            serverError = await response.text();
-        } catch (e) {
+
+            serverError =
+                await response.text();
+
+        } catch (error) {
+
             serverError = "";
         }
 
@@ -373,11 +495,17 @@ IMPORTANT:
         );
     }
 
+
+    /*
+       Read JSON
+    */
+
     let data;
 
     try {
 
-        data = await response.json();
+        data =
+            await response.json();
 
     } catch (error) {
 
@@ -386,12 +514,18 @@ IMPORTANT:
         );
     }
 
+
+    /*
+       Get AI text
+    */
+
     const aiText =
         data &&
         data.message &&
         data.message.content
             ? data.message.content
             : "";
+
 
     if (!aiText.trim()) {
 
@@ -400,13 +534,24 @@ IMPORTANT:
         );
     }
 
+
+    /*
+       Save AI response
+    */
+
     conversationHistory.push({
+
         role: "assistant",
+
         content: aiText
+
     });
+
 
     return aiText.trim();
 }
+
+
 /* =========================================================
    ADD MESSAGE
    ========================================================= */
@@ -414,17 +559,27 @@ IMPORTANT:
 function addMessage(type, content) {
 
     if (!messages) {
-        console.error("messages element nahi mila.");
+
+        console.error(
+            "messages element nahi mila."
+        );
+
         return null;
     }
 
-    const message = document.createElement("div");
+    const message =
+        document.createElement("div");
 
-    message.className = `message ${type}`;
+    message.className =
+        `message ${type}`;
 
-    const avatar = document.createElement("div");
 
-    avatar.className = "avatar";
+    const avatar =
+        document.createElement("div");
+
+    avatar.className =
+        "avatar";
+
 
     if (type === "user") {
 
@@ -439,19 +594,28 @@ function addMessage(type, content) {
         `;
     }
 
+
     const messageContent =
         document.createElement("div");
 
     messageContent.className =
         "message-content";
 
-    messageContent.innerHTML = content;
+    messageContent.innerHTML =
+        content;
 
-    message.appendChild(avatar);
 
-    message.appendChild(messageContent);
+    message.appendChild(
+        avatar
+    );
 
-    messages.appendChild(message);
+    message.appendChild(
+        messageContent
+    );
+
+    messages.appendChild(
+        message
+    );
 
     scrollToBottom();
 
@@ -460,7 +624,7 @@ function addMessage(type, content) {
 
 
 /* =========================================================
-   REAL TYPING EFFECT
+   AI TYPING EFFECT
    ========================================================= */
 
 async function typeAIMessage(text) {
@@ -469,17 +633,23 @@ async function typeAIMessage(text) {
         return;
     }
 
-    const message = document.createElement("div");
+    const message =
+        document.createElement("div");
 
-    message.className = "message ai";
+    message.className =
+        "message ai";
 
-    const avatar = document.createElement("div");
 
-    avatar.className = "avatar";
+    const avatar =
+        document.createElement("div");
+
+    avatar.className =
+        "avatar";
 
     avatar.innerHTML = `
         <i class="fa-solid fa-robot"></i>
     `;
+
 
     const messageContent =
         document.createElement("div");
@@ -487,28 +657,41 @@ async function typeAIMessage(text) {
     messageContent.className =
         "message-content";
 
-    message.appendChild(avatar);
 
-    message.appendChild(messageContent);
+    message.appendChild(
+        avatar
+    );
 
-    messages.appendChild(message);
+    message.appendChild(
+        messageContent
+    );
+
+    messages.appendChild(
+        message
+    );
 
     scrollToBottom();
 
-    /*
-       Character-by-character typing.
-    */
 
     let currentText = "";
 
-    for (let i = 0; i < text.length; i++) {
 
-        currentText += text[i];
+    for (
+        let i = 0;
+        i < text.length;
+        i++
+    ) {
+
+        currentText +=
+            text[i];
 
         messageContent.innerHTML =
-            formatAIResponse(currentText);
+            formatAIResponse(
+                currentText
+            );
 
         scrollToBottom();
+
 
         let delay = 8;
 
@@ -528,7 +711,11 @@ async function typeAIMessage(text) {
 function sleep(ms) {
 
     return new Promise(
-        resolve => setTimeout(resolve, ms)
+        resolve =>
+            setTimeout(
+                resolve,
+                ms
+            )
     );
 }
 
@@ -543,69 +730,65 @@ function formatAIResponse(text) {
         return "";
     }
 
-    let formatted = escapeHTML(text);
+    let formatted =
+        escapeHTML(text);
 
 
-    /*
-       Code blocks
-    */
+    formatted =
+        formatted.replace(
+            /```([a-zA-Z0-9_-]*)\n?([\s\S]*?)```/g,
 
-    formatted = formatted.replace(
-        /```([a-zA-Z0-9_-]*)\n?([\s\S]*?)```/g,
+            function(
+                match,
+                language,
+                code
+            ) {
 
-        function(match, language, code) {
+                const cleanCode =
+                    code.trim();
 
-            const cleanCode =
-                code.trim();
+                const languageName =
+                    language || "code";
 
-            const languageName =
-                language || "code";
+                return `
+                    <div class="code-block">
 
-            return `
-                <div class="code-block">
+                        <div class="code-header">
 
-                    <div class="code-header">
-                        <span>${languageName}</span>
+                            <span>
+                                ${languageName}
+                            </span>
 
-                        <button
-                            class="copy-code"
-                            onclick="copyCode(this)"
-                        >
-                            Copy
-                        </button>
+                            <button
+                                class="copy-code"
+                                onclick="copyCode(this)"
+                            >
+                                Copy
+                            </button>
+
+                        </div>
+
+                        <pre>${cleanCode}</pre>
+
                     </div>
-
-                    <pre>${cleanCode}</pre>
-
-                </div>
-            `;
-        }
-    );
+                `;
+            }
+        );
 
 
-    /*
-       Bold
-    */
-
-    formatted = formatted.replace(
-        /\*\*(.*?)\*\*/g,
-        "<strong>$1</strong>"
-    );
+    formatted =
+        formatted.replace(
+            /\*\*(.*?)\*\*/g,
+            "<strong>$1</strong>"
+        );
 
 
-    /*
-       Inline code
-    */
+    formatted =
+        formatted.replace(
+            /`([^`]+)`/g,
+            "<code>$1</code>"
+        );
 
-    formatted = formatted.replace(
-        /`([^`]+)`/g,
-        "<code>$1</code>"
-    );
-
-
-    /*
-       Protect code blocks from BR replacement.
-    */
 
     const parts =
         formatted.split(
@@ -614,22 +797,25 @@ function formatAIResponse(text) {
 
 
     formatted =
-        parts.map(function(part) {
+        parts
+            .map(function(part) {
 
-            if (
-                part.includes(
-                    '<div class="code-block">'
-                )
-            ) {
-                return part;
-            }
+                if (
+                    part.includes(
+                        '<div class="code-block">'
+                    )
+                ) {
 
-            return part.replace(
-                /\n/g,
-                "<br>"
-            );
+                    return part;
+                }
 
-        }).join("");
+                return part.replace(
+                    /\n/g,
+                    "<br>"
+                );
+
+            })
+            .join("");
 
 
     return formatted;
@@ -645,7 +831,8 @@ function escapeHTML(text) {
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+    div.textContent =
+        text;
 
     return div.innerHTML;
 }
@@ -672,6 +859,7 @@ function showTyping() {
     typing.id =
         "typingIndicator";
 
+
     typing.innerHTML = `
         <div class="avatar">
             <i class="fa-solid fa-robot"></i>
@@ -680,15 +868,20 @@ function showTyping() {
         <div class="message-content">
 
             <span class="typing-dots">
+
                 <span>●</span>
                 <span>●</span>
                 <span>●</span>
+
             </span>
 
         </div>
     `;
 
-    messages.appendChild(typing);
+
+    messages.appendChild(
+        typing
+    );
 
     scrollToBottom();
 }
@@ -720,29 +913,40 @@ async function copyCode(button) {
     try {
 
         const codeBlock =
-            button.closest(".code-block");
+            button.closest(
+                ".code-block"
+            );
 
         if (!codeBlock) {
             return;
         }
 
+
         const pre =
-            codeBlock.querySelector("pre");
+            codeBlock.querySelector(
+                "pre"
+            );
 
         if (!pre) {
             return;
         }
 
+
         const code =
             pre.innerText;
 
-        await navigator.clipboard.writeText(code);
+
+        await navigator.clipboard.writeText(
+            code
+        );
+
 
         const oldText =
             button.innerText;
 
         button.innerText =
             "Copied!";
+
 
         setTimeout(
             function() {
@@ -763,6 +967,7 @@ async function copyCode(button) {
 
         button.innerText =
             "Failed";
+
 
         setTimeout(
             function() {
@@ -802,7 +1007,9 @@ function autoResize() {
    SEND BUTTON STATE
    ========================================================= */
 
-function setSendButtonState(isLoading) {
+function setSendButtonState(
+    isLoading
+) {
 
     if (!sendButton) {
         return;
@@ -810,6 +1017,7 @@ function setSendButtonState(isLoading) {
 
     sendButton.disabled =
         isLoading;
+
 
     if (isLoading) {
 
@@ -837,7 +1045,9 @@ function setSendButtonState(isLoading) {
 function scrollToBottom() {
 
     const chatArea =
-        document.querySelector(".chat-area");
+        document.querySelector(
+            ".chat-area"
+        );
 
     if (!chatArea) {
         return;
@@ -906,7 +1116,9 @@ if (sendButton) {
    ========================================================= */
 
 document
-    .querySelectorAll("[data-prompt]")
+    .querySelectorAll(
+        "[data-prompt]"
+    )
     .forEach(
         function(button) {
 
@@ -923,7 +1135,9 @@ document
                         return;
                     }
 
-                    sendMessage(prompt);
+                    sendMessage(
+                        prompt
+                    );
 
                 }
             );
@@ -942,19 +1156,23 @@ if (newChatBtn) {
         "click",
         function() {
 
-            conversationHistory = [];
+            conversationHistory =
+                [];
 
             if (messages) {
-                messages.innerHTML = "";
+                messages.innerHTML =
+                    "";
             }
 
             if (welcome) {
-                welcome.style.display = "";
+                welcome.style.display =
+                    "";
             }
 
             if (messageInput) {
 
-                messageInput.value = "";
+                messageInput.value =
+                    "";
 
                 autoResize();
 
@@ -972,7 +1190,10 @@ if (newChatBtn) {
    MOBILE SIDEBAR
    ========================================================= */
 
-if (mobileMenu && sidebar) {
+if (
+    mobileMenu &&
+    sidebar
+) {
 
     mobileMenu.addEventListener(
         "click",
@@ -1011,6 +1232,7 @@ if (sidebar) {
                             sidebar.classList.remove(
                                 "open"
                             );
+
                         }
 
                     }
@@ -1024,6 +1246,7 @@ if (sidebar) {
 /* =========================================================
    STARTUP
    ========================================================= */
+
 document.addEventListener(
     "DOMContentLoaded",
     async function() {
