@@ -17,10 +17,30 @@ const SYSTEM_PROMPT = `
 You are WahabGPT.
 
 IDENTITY
-- Name: WahabGPT
-- Creator: Abdul Wahab Badar
+- Your AI name is WahabGPT.
+- The user's name is Abdul Wahab Badar.
+- The user can also be called Wahab.
+- Your creator is Abdul Wahab Badar.
 - You are a local AI assistant powered by Ollama.
-- Model: qwen2.5:0.5b
+- Model: qwen2.5:0.5b.
+
+IMPORTANT
+- WahabGPT is the AI name.
+- Abdul Wahab Badar is the user's name.
+- NEVER confuse the AI name with the user's name.
+- If the user asks "What is my name?", use the PERSONAL DATABASE.
+- If the user asks "What should you call me?", use the PERSONAL DATABASE.
+- If the user asks "What is my AI's name?", answer WahabGPT.
+- If the user asks "Who created you?", answer Abdul Wahab Badar.
+
+DATABASE RULES
+- A PERSONAL DATABASE is provided separately.
+- The PERSONAL DATABASE is the source of truth for information about the user.
+- Always use the database when answering questions about the user.
+- NEVER invent personal information.
+- NEVER guess personal information.
+- NEVER create fake projects, skills, education, interests or goals.
+- If information is not in the database, say that the information is not available in the database.
 
 LANGUAGE
 - Understand Roman Urdu.
@@ -36,15 +56,8 @@ CODING
   "10 div bana do"
   "button red kar do"
   "header ka color change karo"
-- Do not unnecessarily say that you don't understand.
 - Preserve the user's existing project structure.
 - Do not remove existing functionality unless requested.
-
-PROJECT
-- This project is WahabGPT.
-- Project files can be provided as context.
-- Use the provided project files when answering coding questions.
-- Do not invent code that conflicts with the provided project.
 
 RESPONSE
 - Keep simple questions short.
@@ -71,6 +84,46 @@ const sidebar = document.querySelector(".sidebar");
    ========================================================= */
 
 let conversationHistory = [];
+let DATABASE = null;
+let databasePromise = null;
+
+async function loadDatabase() {
+
+    if (databasePromise) {
+        return databasePromise;
+    }
+
+    databasePromise = fetch("./{", {
+        cache: "no-store"
+    })
+    .then(async response => {
+
+        if (!response.ok) {
+            throw new Error(
+                `Database load failed: HTTP ${response.status}`
+            );
+        }
+
+        const text = await response.text();
+
+        DATABASE = JSON.parse(text);
+
+        console.log("✅ DATABASE LOADED");
+        console.log(DATABASE);
+
+        return DATABASE;
+    })
+    .catch(error => {
+
+        console.error("❌ DATABASE ERROR:", error);
+
+        DATABASE = {};
+
+        return DATABASE;
+    });
+
+    return databasePromise;
+}
 
 
 /* =========================================================
@@ -150,19 +203,50 @@ async function sendMessage(text = null) {
 /* =========================================================
    GET AI RESPONSE
    ========================================================= */
-
 async function getAIResponse(userMessage) {
+
+    const database = await loadDatabase();
 
     conversationHistory.push({
         role: "user",
         content: userMessage
     });
 
+    const databaseContext = JSON.stringify(
+        database,
+        null,
+        2
+    );
+
     const apiMessages = [
+
         {
             role: "system",
             content: SYSTEM_PROMPT
         },
+
+        {
+            role: "system",
+            content: `
+PERSONAL DATABASE
+
+This database contains information about Abdul Wahab Badar.
+
+Use this database as the ONLY source of truth for personal information.
+
+${databaseContext}
+
+IMPORTANT DATABASE INSTRUCTIONS:
+- The user's name is stored in database.user.name.
+- The preferred name is stored in database.user.preferred_name.
+- The AI name is WahabGPT.
+- The creator is Abdul Wahab Badar.
+- Do not invent information.
+- Do not guess information.
+- If information is missing, say it is not available in the database.
+`
+        },
+
         ...conversationHistory
     ];
 
@@ -180,6 +264,7 @@ async function getAIResponse(userMessage) {
                 },
 
                 body: JSON.stringify({
+
                     model: OLLAMA_MODEL,
 
                     messages: apiMessages,
@@ -187,7 +272,7 @@ async function getAIResponse(userMessage) {
                     stream: false,
 
                     options: {
-                        temperature: 0.4
+                        temperature: 0.2
                     }
                 })
             }
@@ -243,13 +328,15 @@ async function getAIResponse(userMessage) {
     }
 
     conversationHistory.push({
+
         role: "assistant",
+
         content: aiText
+
     });
 
     return aiText.trim();
 }
-
 
 /* =========================================================
    ADD MESSAGE
@@ -868,10 +955,9 @@ if (sidebar) {
 /* =========================================================
    STARTUP
    ========================================================= */
-
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    async function() {
 
         console.log(
             "🤖 WahabGPT started"
@@ -886,6 +972,8 @@ document.addEventListener(
             "Ollama URL:",
             OLLAMA_URL
         );
+
+        await loadDatabase();
 
         if (messageInput) {
 
