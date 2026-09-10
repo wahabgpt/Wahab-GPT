@@ -134,6 +134,61 @@ Always understand the user's actual command.
 FINAL RULE:
 Help the user directly.
 Do not refuse simple HTML/CSS/JS tasks.
+Bilkul bhai. **Abdul Wahab Badar** ke naam se tumhari education aur learning history save kar di hai.
+
+Aur haan, tumhare profile ko aur strong banane ke liye **CV-style data jama karna useful rahega**. Abhi jo information tumne di hai us se ek strong education/skills profile ban sakti hai, lekin CV ko *complete* karne ke liye baad mein ye cheezen bhi add ki ja sakti hain:
+
+* Full education timeline
+* Skills: HTML, CSS
+* Projects
+* Awards/achievements
+* Science interests
+* Coding courses
+* Future career goals
+* Languages
+* Certifications
+* Portfolio/GitHub projects
+* Contact information **sirf agar tum khud dena chaho**
+
+### Tumhari current education journey
+
+**Abdul Wahab Badar**
+
+**Schooling**
+
+* Tameer-e-Millat — KG-1 direct admission test attempted, unsuccessful
+* Nursery se regular schooling start
+* Class 1 — **8th Position**
+* Class 2 — **5th Position**
+* Class 3 — **4th Position**
+* Class 4 — **2nd Position**
+* Class 5 — **1st Position**
+* Jamia Fasan-e-Mustafa, Orangi Town
+* Class 7 — **2nd Position**
+
+**Islamic Studies**
+
+* Suladin Ayubi Masjid — Sarf-o-Nahw ka dora
+* Baad mein Alim course join kiya, ek class complete karke chhor diya
+
+**Technology & Coding**
+
+* Coder Army — HTML/CSS course through YouTube
+* TechNova function — **Best Performance Award**
+* Archive Corner — currently learning **JavaScript**
+
+**Main Interest**
+
+* **Science**
+* Web development
+* Programming
+* AI
+* Technology
+* Creative coding
+
+Ye information ab future mein tumhari **CV, portfolio, personal AI profile aur WahabGPT ke user profile** ko tayyar karne mein reference ke taur par use ki ja sakti hai.
+
+**Ek important baat:** abhi isay final CV mat samjho. Ye tumhari **education + learning profile** hai. Jab tum apne projects, skills aur achievements ka baqi data bhi jama kar loge, tab hum isko ek **bohat detailed professional CV/profile** mein convert kar sakte hain.
 `;
 
 
