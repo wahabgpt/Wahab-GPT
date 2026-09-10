@@ -1,0 +1,380 @@
+{
+  "user": {
+    "name": "Abdul Wahab Badar",
+    "preferred_name": "Wahab",
+    "status": "student",
+    "language": "Roman Urdu / Hinglish",
+    "response_style": "simple, direct and beginner-friendly"
+  },
+
+  "identity": {
+    "ai_name": "WahabGPT",
+    "creator": "Abdul Wahab Badar",
+    "purpose": "Local personal AI coding assistant"
+  },
+
+  "education": {
+    "school": [
+      {
+        "institution": "Tameer-e-Millat",
+        "event": "KG-1 direct admission test",
+        "result": "Unsuccessful"
+      },
+      {
+        "level": "Nursery",
+        "result": "Regular schooling started"
+      },
+      {
+        "level": "Class 1",
+        "position": "8th"
+      },
+      {
+        "level": "Class 2",
+        "position": "5th"
+      },
+      {
+        "level": "Class 3",
+        "position": "4th"
+      },
+      {
+        "level": "Class 4",
+        "position": "2nd"
+      },
+      {
+        "level": "Class 5",
+        "position": "1st"
+      },
+      {
+        "institution": "Jamia Fasan-e-Mustafa",
+        "location": "Orangi Town"
+      },
+      {
+        "level": "Class 7",
+        "position": "2nd"
+      }
+    ],
+
+    "islamic_studies": [
+      {
+        "institution": "Suladin Ayubi Masjid",
+        "course": "Sarf-o-Nahw"
+      },
+      {
+        "course": "Alim Course",
+        "progress": "One class completed"
+      }
+    ],
+
+    "technology_learning": [
+      {
+        "platform": "Coder Army",
+        "subject": "HTML/CSS",
+        "source": "YouTube"
+      },
+      {
+        "institution": "TechNova",
+        "achievement": "Best Performance Award"
+      },
+      {
+        "institution": "Archive Corner",
+        "subject": "JavaScript",
+        "status": "Learning"
+      }
+    ]
+  },
+
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Web Development",
+    "AI",
+    "Programming",
+    "Technology",
+    "Creative Coding",
+    "Web Design"
+  ],
+
+  "interests": [
+    "Science",
+    "Web Development",
+    "Programming",
+    "Artificial Intelligence",
+    "Robotics",
+    "Technology",
+    "Creative Projects",
+    "Game Development",
+    "Design"
+  ],
+
+  "projects": {
+    "major": [
+      {
+        "name": "WahabGPT",
+        "type": "Local Personal AI",
+        "technology": [
+          "Ollama",
+          "JavaScript",
+          "HTML",
+          "CSS"
+        ],
+        "model": "qwen2.5:0.5b"
+      },
+      {
+        "name": "WEB PAGE BUILDER PRO",
+        "type": "Visual Website Builder",
+        "technology": [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ]
+      },
+      {
+        "name": "Ludo",
+        "type": "Game",
+        "technology": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Canvas"
+        ]
+      },
+      {
+        "name": "Khata",
+        "type": "Accounting Application"
+      },
+      {
+        "name": "Todo",
+        "type": "Web Application"
+      },
+      {
+        "name": "Calculator",
+        "type": "Web Application"
+      },
+      {
+        "name": "Portfolio",
+        "type": "Web Project"
+      },
+      {
+        "name": "Translation Website",
+        "type": "Web Application"
+      },
+      {
+        "name": "Quran Word Search",
+        "type": "Islamic Web Project"
+      },
+      {
+        "name": "NASA API Dashboard",
+        "type": "API Web Project"
+      },
+      {
+        "name": "Firebase Chat",
+        "type": "Chat and Upload Prototype"
+      }
+    ]
+  },
+
+  "web_page_builder": {
+    "name": "WEB PAGE BUILDER PRO",
+    "purpose": "Visual website editor and template builder",
+
+    "layout": [
+      "Components panel",
+      "Website canvas",
+      "Properties panel"
+    ],
+
+    "components": [
+      "Header",
+      "Heading",
+      "Paragraph",
+      "Box",
+      "Container",
+      "Input",
+      "Card",
+      "Image Card",
+      "Image",
+      "Video",
+      "Button",
+      "Divider",
+      "Spacer",
+      "Footer"
+    ],
+
+    "properties": [
+      "Background Color",
+      "Background Image",
+      "Theme Color",
+      "Typography",
+      "Opacity",
+      "Shadow",
+      "Border",
+      "Width",
+      "Height",
+      "Position",
+      "Padding",
+      "Margin",
+      "Border Radius",
+      "Text Color",
+      "Text Align",
+      "Text Transform",
+      "Letter Spacing",
+      "Line Height",
+      "Text Decoration",
+      "Image URL",
+      "Image Upload",
+      "Image Filter",
+      "Button URL",
+      "Button Text"
+    ],
+
+    "design_preferences": [
+      "Premium",
+      "Modern",
+      "Clean",
+      "Blue",
+      "White",
+      "Responsive"
+    ],
+
+    "important_colors": [
+      "#2563eb",
+      "#1e3a8a",
+      "#eff6ff",
+      "#bfdbfe"
+    ],
+
+    "important_rule": "Preserve existing project structure and functionality when modifying the builder unless the user explicitly asks for changes."
+  },
+
+  "ai_projects": [
+    "AI image generation",
+    "AI video prompts",
+    "AI video editing",
+    "Text-to-speech",
+    "Captions",
+    "Sound effects",
+    "Animated typography",
+    "Canva projects",
+    "Remotion projects",
+    "ElevenLabs projects",
+    "Gemini projects",
+    "Qwen-style prompts"
+  ],
+
+  "content_creation": {
+    "platforms": [
+      "YouTube",
+      "TikTok"
+    ],
+    "interests": [
+      "Urdu/Hinglish comedy",
+      "Facts",
+      "Animated typography",
+      "AI videos",
+      "Video editing",
+      "Captions",
+      "Sound effects"
+    ],
+    "branding": [
+      "Wahab Studio"
+    ]
+  },
+
+  "stories": {
+    "main_story": {
+      "title": "سلطان میرزا / سلطان کی طاقت",
+      "characters": [
+        "سلطان میرزا",
+        "مرزا",
+        "Don Mirza",
+        "Pappu",
+        "Chhotu",
+        "مسکان",
+        "شیر"
+      ],
+      "groups": [
+        "Tiger Gang"
+      ],
+      "symbol": "گرجتے شیر کا سر",
+      "nickname": "بھائی سلطان"
+    },
+
+    "other_stories": [
+      "Hasi Khauf Ka Jahaan — Film 1: Churail",
+      "Andheron ka Alam"
+    ]
+  },
+
+  "robotics": {
+    "interest": true,
+    "planned_projects": [
+      "ESP32-CAM",
+      "ESP32 DevKit",
+      "DC gear motors",
+      "L298N motor drivers",
+      "Camera",
+      "MAX98357 speaker",
+      "Microphone",
+      "Mobile web control"
+    ]
+  },
+
+  "technology": {
+    "local_ai": {
+      "software": "Ollama",
+      "model": "qwen2.5:0.5b",
+      "api": "http://127.0.0.1:11434/api/chat"
+    },
+
+    "web": [
+      "GitHub Pages",
+      "CodePen",
+      "Firebase"
+    ]
+  },
+
+  "learning_goals": [
+    "Learn HTML",
+    "Learn CSS",
+    "Learn JavaScript",
+    "Learn Web Development",
+    "Learn AI",
+    "Learn Robotics",
+    "Build real projects",
+    "Build a personal AI",
+    "Build websites"
+  ],
+
+  "response_preferences": {
+    "language": "Roman Urdu / Hinglish",
+    "tone": "Friendly",
+    "explanation": "Simple",
+    "answer_style": "Direct",
+    "technical_terms": "Simple English where useful",
+    "coding": "Clean and readable",
+    "code_delivery": "Complete copy-paste code preferred"
+  },
+
+  "coding_preferences": {
+    "preserve_existing_design": true,
+    "preserve_existing_logic": true,
+    "avoid_unnecessary_redesign": true,
+    "avoid_unnecessary_feature_removal": true,
+    "prefer_full_replacement_code": true,
+    "prefer_readable_code": true
+  },
+
+  "future_goals": [
+    "Build a powerful personal AI",
+    "Make WahabGPT remember useful information",
+    "Connect WahabGPT with knowledge sources",
+    "Connect Quran data",
+    "Connect Hadith data",
+    "Connect poetry data",
+    "Connect Pakistani law data",
+    "Use source-based answers",
+    "Build AI learning tools",
+    "Build robotics projects"
+  ]
+}
