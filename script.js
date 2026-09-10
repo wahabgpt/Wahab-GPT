@@ -88,16 +88,14 @@ let DATABASE = null;
 let databasePromise = null;
 
 async function loadDatabase() {
-
     if (databasePromise) {
         return databasePromise;
     }
 
-    databasePromise = fetch("./{", {
+    databasePromise = fetch("./{.json", {
         cache: "no-store"
     })
     .then(async response => {
-
         if (!response.ok) {
             throw new Error(
                 `Database load failed: HTTP ${response.status}`
@@ -114,17 +112,13 @@ async function loadDatabase() {
         return DATABASE;
     })
     .catch(error => {
-
         console.error("❌ DATABASE ERROR:", error);
-
         DATABASE = {};
-
         return DATABASE;
     });
 
     return databasePromise;
 }
-
 
 /* =========================================================
    SEND MESSAGE
