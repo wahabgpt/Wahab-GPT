@@ -163,7 +163,7 @@ async function loadDatabase() {
         return databasePromise;
     }
 
-    databasePromise = fetch("./{.json", {
+    databasePromise = fetch("./database.json", {
         cache: "no-store"
     })
     .then(async response => {
