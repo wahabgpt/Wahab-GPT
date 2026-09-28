@@ -3,242 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>WahabGPT — Coding AI</title>
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <title>FreeKhata AI — Aapka Digital Munshi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
     <div class="app">
-
-        <!-- ================= SIDEBAR ================= -->
         <aside class="sidebar">
-
             <div class="brand">
-                <div class="brand-icon">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <div class="brand-icon" style="background: linear-gradient(135deg, #00C853, #009624);">
+                    <i class="fa-solid fa-book"></i>
                 </div>
-
-                <div>
-                    <h1>WahabGPT</h1>
-                    <span>Coding AI</span>
-                </div>
+                <div><h1>FreeKhata</h1><span>AI Munshi</span></div>
             </div>
-
-            <button class="new-chat" id="newChatBtn">
-                <i class="fa-solid fa-plus"></i>
-                <span>New Chat</span>
+            <button class="new-chat" id="newChatBtn" style="border-color: rgba(0,200,83,0.35); background: linear-gradient(135deg, rgba(0,200,83,0.18), rgba(0,150,36,0.10));">
+                <i class="fa-solid fa-plus"></i><span>New Hisab</span>
             </button>
-
             <nav class="menu">
-
-                <div class="menu-title">WORKSPACE</div>
-
-                <button class="menu-item active">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Chat AI</span>
-                </button>
-
-                <button class="menu-item">
-                    <i class="fa-solid fa-code"></i>
-                    <span>Code</span>
-                </button>
-
-                <button class="menu-item">
-                    <i class="fa-solid fa-brain"></i>
-                    <span>Training</span>
-                </button>
-
-                <button class="menu-item">
-                    <i class="fa-regular fa-folder-open"></i>
-                    <span>Projects</span>
-                </button>
-
-                <div class="menu-title recent-title">RECENT</div>
-
-                <button class="recent-chat">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Website AI</span>
-                </button>
-
-                <button class="recent-chat">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Login Page</span>
-                </button>
-
-                <button class="recent-chat">
-                    <i class="fa-regular fa-message"></i>
-                    <span>Portfolio</span>
-                </button>
-
+                <div class="menu-title">KHATA</div>
+                <button class="menu-item active"><i class="fa-solid fa-comments"></i><span>AI Chat</span></button>
+                <button class="menu-item"><i class="fa-solid fa-users"></i><span>Customers</span></button>
+                <button class="menu-item"><i class="fa-solid fa-file-invoice-dollar"></i><span>Udhar Jama</span></button>
+                <div class="menu-title recent-title">QUICK HELP</div>
+                <button class="recent-chat" data-q="Udhar kaise likhun?"><i class="fa-regular fa-message"></i><span>Udhar Kaise Likhun?</span></button>
+                <button class="recent-chat" data-q="Jama kya hai?"><i class="fa-regular fa-message"></i><span>Jama Kya Hai?</span></button>
+                <button class="recent-chat" data-q="Backup kaise lun?"><i class="fa-regular fa-message"></i><span>Backup PDF</span></button>
             </nav>
-
             <div class="sidebar-bottom">
-
-                <button class="menu-item">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Settings</span>
-                </button>
-
-                <div class="model-card">
-
-                    <div class="model-dot"></div>
-
-                    <div class="model-info">
-                        <strong>WahabGPT</strong>
-                        <span>Local AI Model</span>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-right"></i>
-
-                </div>
-
+                <div class="model-card"><div class="model-dot" style="background:#00C853; box-shadow: 0 0 10px #00C853;"></div><div class="model-info"><strong>FreeKhata AI</strong><span>Online & Free</span></div></div>
             </div>
-
         </aside>
 
-
-        <!-- ================= MAIN ================= -->
         <main class="main">
-
-            <!-- HEADER -->
             <header class="topbar">
-
-                <button class="mobile-menu" id="mobileMenu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-
-                <div class="page-title">
-                    <strong>WahabGPT</strong>
-                    <span>AI Coding Assistant</span>
-                </div>
-
-                <div class="top-actions">
-
-                    <div class="online">
-                        <span></span>
-                        AI Online
-                    </div>
-
-                    <button class="icon-button">
-                        <i class="fa-solid fa-bell"></i>
-                    </button>
-
-                    <button class="icon-button">
-                        <i class="fa-solid fa-gear"></i>
-                    </button>
-
-                </div>
-
+                <div class="page-title"><strong>FreeKhata AI</strong><span>Aapka Digital Munshi</span></div>
+                <div class="top-actions"><div class="online" style="border-color: rgba(0,200,83,0.15); color:#86efac; background: rgba(0,200,83,0.06);"><span style="background:#00C853; box-shadow: 0 0 8px #00C853;"></span> AI Online</div></div>
             </header>
 
-
-            <!-- CHAT AREA -->
             <section class="chat-area" id="chatArea">
-
-                <!-- WELCOME -->
                 <div class="welcome" id="welcome">
-
-                    <div class="ai-orb">
-
-                        <div class="orb-ring ring-one"></div>
-                        <div class="orb-ring ring-two"></div>
-
-                        <div class="orb-core">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-
-                    </div>
-
-                    <h2>
-                        What can I build
-                        <span>for you?</span>
-                    </h2>
-
-                    <p>
-                        I'm WahabGPT, your AI coding assistant.
-                        Ask me to create, fix or explain code.
-                    </p>
-
-                    <!-- QUICK ACTIONS -->
+                    <div class="ai-orb"><div class="orb-ring ring-one" style="border-color: rgba(0,200,83,0.25);"></div><div class="orb-ring ring-two" style="border-color: rgba(34,211,238,0.18);"></div><div class="orb-core" style="background: linear-gradient(135deg, #00C853, #009624); box-shadow: 0 0 35px rgba(0,200,83,0.38);"><i class="fa-solid fa-book"></i></div></div>
+                    <h2>FreeKhata me <span>khush amdeed</span></h2>
+                    <p>Main aapka AI Munshi hun. Udhar, Jama, Hisab, Backup - kuch bhi puch sakte hain.</p>
                     <div class="quick-actions">
-
-                        <button data-prompt="Create a responsive website using HTML CSS and JavaScript">
-                            <i class="fa-solid fa-code"></i>
-                            <span>Generate Code</span>
-                        </button>
-
-                        <button data-prompt="Find and fix the errors in my code">
-                            <i class="fa-solid fa-bug"></i>
-                            <span>Fix Code</span>
-                        </button>
-
-                        <button data-prompt="Explain this code in simple words">
-                            <i class="fa-solid fa-book-open"></i>
-                            <span>Explain Code</span>
-                        </button>
-
-                        <button data-prompt="Improve my website code">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>Improve Code</span>
-                        </button>
-
+                        <button data-prompt="Udhar kaise likhun?"><i class="fa-solid fa-plus" style="color:#00C853;"></i><span>Udhar Likhna</span></button>
+                        <button data-prompt="Jama wusool kaise karun?"><i class="fa-solid fa-money-bill-wave" style="color:#00C853;"></i><span>Jama Wusool</span></button>
+                        <button data-prompt="Backup PDF kaise download karun?"><i class="fa-solid fa-download" style="color:#00C853;"></i><span>Backup PDF</span></button>
+                        <button data-prompt="FreeKhata free hai?"><i class="fa-solid fa-check" style="color:#00C853;"></i><span>Kya Free Hai?</span></button>
                     </div>
-
                 </div>
-
-
-                <!-- MESSAGES -->
                 <div class="messages" id="messages"></div>
-
             </section>
 
-
-            <!-- INPUT AREA -->
             <section class="composer-wrapper">
-
                 <div class="composer">
-
-                    <button class="attach-button" title="Attach">
-                        <i class="fa-solid fa-paperclip"></i>
-                    </button>
-
-                    <textarea
-                        id="messageInput"
-                        placeholder="Ask WahabGPT to build something..."
-                        rows="1"></textarea>
-
-                    <div class="composer-actions">
-
-                        <button class="tool-button" title="Code">
-                            <i class="fa-solid fa-code"></i>
-                        </button>
-
-                        <button class="send-button" id="sendButton">
-                            <i class="fa-solid fa-arrow-up"></i>
-                        </button>
-
-                    </div>
-
+                    <textarea id="messageInput" placeholder="FreeKhata se kuch pucho..." rows="1"></textarea>
+                    <div class="composer-actions"><button class="send-button" id="sendButton" style="background: linear-gradient(135deg, #00C853, #009624); box-shadow: 0 5px 20px rgba(0,200,83,0.25);"><i class="fa-solid fa-arrow-up"></i></button></div>
                 </div>
-
-                <p class="disclaimer">
-                    WahabGPT can make mistakes. Check important code before using it.
-                </p>
-
             </section>
-
         </main>
-
     </div>
+    <script>
+        // --- FREEKHATA AI BRAIN (HTML/CSS wala, tez) ---
+        const chatArea = document.getElementById("chatArea");
+        const messages = document.getElementById("messages");
+        const welcome = document.getElementById("welcome");
+        const input = document.getElementById("messageInput");
+        const sendBtn = document.getElementById("sendButton");
+        const newChatBtn = document.getElementById("newChatBtn");
 
+        const knowledge = {
+          "udhar": "📒 <b>Udhar Likhnay Ka Tareeka:</b><br><br>1. Customer Add karein<br>2. 'Udhar Do' button pe click karein<br>3. Amount likhein<br>4. Save karein<br><br>Aapka khata auto save ho jayega!",
+          "jama": "💰 <b>Jama / Wusooli:</b><br><br>Jab customer paise wapis de to 'Jama Wusool' pe click karke amount likhein. Ye aapke Jama me add ho jayega.",
+          "backup": "☁️ <b>Backup / PDF:</b><br><br>Settings > Download PDF pe click karein. Aapka pura hisab PDF me download ho jayega. Data aapke mobile me 100% safe hai.",
+          "free": "✅ <b>Ji haan, FreeKhata 100% Free hai!</b><br><br>Koi fees nahi, unlimited customers, unlimited udhar jama. Hamesha free rahega.",
+          "hisab": "📊 <b>Hisab Kitab:</b><br><br>Dashboard pe aapko total Udhar, total Jama aur baqi raqam nazar aayegi. Roz ka hisab bhi wahan se dekh sakte hain."
+        };
 
-    <script src="script.js"></script>
+        function addMsg(role, html){
+          if(welcome) welcome.style.display="none";
+          const div = document.createElement("div");
+          div.className = `message ${role}`;
+          div.innerHTML = `<div class="avatar"><i class="fa-solid fa-${role==='user'?'user':'book'}"></i></div><div class="message-content">${html}</div>`;
+          messages.appendChild(div);
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }
 
+        function handleMessage(text){
+          if(!text.trim()) return;
+          addMsg("user", text);
+          input.value="";
+          setTimeout(()=>{
+            let reply = "Main aapki is baat me madad kar sakta hun: Udhar, Jama, Hisab, Backup. In me se koi lafz likh ke bhejein.";
+            let low = text.toLowerCase();
+            for(let k in knowledge){ if(low.includes(k)){ reply = knowledge[k]; break; } }
+            addMsg("ai", reply);
+          }, 400);
+        }
+
+        sendBtn.onclick = () => handleMessage(input.value);
+        input.addEventListener("keydown", e=>{ if(e.key==="Enter" &&!e.shiftKey){ e.preventDefault(); handleMessage(input.value); }});
+        document.querySelectorAll("[data-prompt], [data-q]").forEach(b=> b.onclick = ()=> handleMessage(b.dataset.prompt || b.dataset.q));
+        newChatBtn.onclick = ()=>{ messages.innerHTML=""; welcome.style.display="block"; };
+    </script>
 </body>
 </html>
