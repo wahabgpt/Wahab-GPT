@@ -1,110 +1,242 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreeKhata AI — Aapka Digital Munshi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+<title>WahabGPT — Personal AI</title>
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    <div class="app">
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-icon" style="background: linear-gradient(135deg, #00C853, #009624);">
-                    <i class="fa-solid fa-book"></i>
-                </div>
-                <div><h1>FreeKhata</h1><span>AI Munshi</span></div>
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-book-open"></i>
             </div>
-            <button class="new-chat" id="newChatBtn" style="border-color: rgba(0,200,83,0.35); background: linear-gradient(135deg, rgba(0,200,83,0.18), rgba(0,150,36,0.10));">
-                <i class="fa-solid fa-plus"></i><span>New Hisab</span>
+
+            <div>
+                <h1>WahabGPT</h1>
+                <span>Personal AI Khata</span>
+            </div>
+
+        </div>
+
+
+        <button class="new-chat" id="newChatBtn">
+            <i class="fa-solid fa-plus"></i>
+            New Chat
+        </button>
+
+
+        <div class="sidebar-section">
+
+            <div class="section-title">
+                <i class="fa-solid fa-book"></i>
+                AI MENU
+            </div>
+
+            <button class="menu-item" data-prompt="Tell me about myself">
+                <i class="fa-solid fa-user"></i>
+                About Me
             </button>
-            <nav class="menu">
-                <div class="menu-title">KHATA</div>
-                <button class="menu-item active"><i class="fa-solid fa-comments"></i><span>AI Chat</span></button>
-                <button class="menu-item"><i class="fa-solid fa-users"></i><span>Customers</span></button>
-                <button class="menu-item"><i class="fa-solid fa-file-invoice-dollar"></i><span>Udhar Jama</span></button>
-                <div class="menu-title recent-title">QUICK HELP</div>
-                <button class="recent-chat" data-q="Udhar kaise likhun?"><i class="fa-regular fa-message"></i><span>Udhar Kaise Likhun?</span></button>
-                <button class="recent-chat" data-q="Jama kya hai?"><i class="fa-regular fa-message"></i><span>Jama Kya Hai?</span></button>
-                <button class="recent-chat" data-q="Backup kaise lun?"><i class="fa-regular fa-message"></i><span>Backup PDF</span></button>
-            </nav>
-            <div class="sidebar-bottom">
-                <div class="model-card"><div class="model-dot" style="background:#00C853; box-shadow: 0 0 10px #00C853;"></div><div class="model-info"><strong>FreeKhata AI</strong><span>Online & Free</span></div></div>
+
+            <button class="menu-item" data-prompt="Tell me about my projects">
+                <i class="fa-solid fa-folder-open"></i>
+                My Projects
+            </button>
+
+            <button class="menu-item" data-prompt="What are my coding skills?">
+                <i class="fa-solid fa-code"></i>
+                My Skills
+            </button>
+
+            <button class="menu-item" data-prompt="What are my learning goals?">
+                <i class="fa-solid fa-graduation-cap"></i>
+                Learning
+            </button>
+
+        </div>
+
+
+        <div class="sidebar-section recent-section">
+
+            <div class="section-title">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                RECENT CHATS
             </div>
-        </aside>
 
-        <main class="main">
-            <header class="topbar">
-                <div class="page-title"><strong>FreeKhata AI</strong><span>Aapka Digital Munshi</span></div>
-                <div class="top-actions"><div class="online" style="border-color: rgba(0,200,83,0.15); color:#86efac; background: rgba(0,200,83,0.06);"><span style="background:#00C853; box-shadow: 0 0 8px #00C853;"></span> AI Online</div></div>
-            </header>
+            <div class="recent-chat">
+                <i class="fa-regular fa-message"></i>
+                <span>Current Chat</span>
+            </div>
 
-            <section class="chat-area" id="chatArea">
-                <div class="welcome" id="welcome">
-                    <div class="ai-orb"><div class="orb-ring ring-one" style="border-color: rgba(0,200,83,0.25);"></div><div class="orb-ring ring-two" style="border-color: rgba(34,211,238,0.18);"></div><div class="orb-core" style="background: linear-gradient(135deg, #00C853, #009624); box-shadow: 0 0 35px rgba(0,200,83,0.38);"><i class="fa-solid fa-book"></i></div></div>
-                    <h2>FreeKhata me <span>khush amdeed</span></h2>
-                    <p>Main aapka AI Munshi hun. Udhar, Jama, Hisab, Backup - kuch bhi puch sakte hain.</p>
-                    <div class="quick-actions">
-                        <button data-prompt="Udhar kaise likhun?"><i class="fa-solid fa-plus" style="color:#00C853;"></i><span>Udhar Likhna</span></button>
-                        <button data-prompt="Jama wusool kaise karun?"><i class="fa-solid fa-money-bill-wave" style="color:#00C853;"></i><span>Jama Wusool</span></button>
-                        <button data-prompt="Backup PDF kaise download karun?"><i class="fa-solid fa-download" style="color:#00C853;"></i><span>Backup PDF</span></button>
-                        <button data-prompt="FreeKhata free hai?"><i class="fa-solid fa-check" style="color:#00C853;"></i><span>Kya Free Hai?</span></button>
-                    </div>
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="local-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>Local AI</strong>
+                    <small>Ollama Connected</small>
                 </div>
-                <div class="messages" id="messages"></div>
-            </section>
 
-            <section class="composer-wrapper">
-                <div class="composer">
-                    <textarea id="messageInput" placeholder="FreeKhata se kuch pucho..." rows="1"></textarea>
-                    <div class="composer-actions"><button class="send-button" id="sendButton" style="background: linear-gradient(135deg, #00C853, #009624); box-shadow: 0 5px 20px rgba(0,200,83,0.25);"><i class="fa-solid fa-arrow-up"></i></button></div>
+            </div>
+
+            <div class="powered">
+                WahabGPT • Local
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <button id="mobileMenu" class="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="page-title">
+
+                <div class="title-icon">
+                    <i class="fa-solid fa-book-open"></i>
                 </div>
-            </section>
-        </main>
-    </div>
-    <script>
-        // --- FREEKHATA AI BRAIN (HTML/CSS wala, tez) ---
-        const chatArea = document.getElementById("chatArea");
-        const messages = document.getElementById("messages");
-        const welcome = document.getElementById("welcome");
-        const input = document.getElementById("messageInput");
-        const sendBtn = document.getElementById("sendButton");
-        const newChatBtn = document.getElementById("newChatBtn");
 
-        const knowledge = {
-          "udhar": "📒 <b>Udhar Likhnay Ka Tareeka:</b><br><br>1. Customer Add karein<br>2. 'Udhar Do' button pe click karein<br>3. Amount likhein<br>4. Save karein<br><br>Aapka khata auto save ho jayega!",
-          "jama": "💰 <b>Jama / Wusooli:</b><br><br>Jab customer paise wapis de to 'Jama Wusool' pe click karke amount likhein. Ye aapke Jama me add ho jayega.",
-          "backup": "☁️ <b>Backup / PDF:</b><br><br>Settings > Download PDF pe click karein. Aapka pura hisab PDF me download ho jayega. Data aapke mobile me 100% safe hai.",
-          "free": "✅ <b>Ji haan, FreeKhata 100% Free hai!</b><br><br>Koi fees nahi, unlimited customers, unlimited udhar jama. Hamesha free rahega.",
-          "hisab": "📊 <b>Hisab Kitab:</b><br><br>Dashboard pe aapko total Udhar, total Jama aur baqi raqam nazar aayegi. Roz ka hisab bhi wahan se dekh sakte hain."
-        };
+                <div>
+                    <h2>WahabGPT</h2>
+                    <span>Digital AI Khata</span>
+                </div>
 
-        function addMsg(role, html){
-          if(welcome) welcome.style.display="none";
-          const div = document.createElement("div");
-          div.className = `message ${role}`;
-          div.innerHTML = `<div class="avatar"><i class="fa-solid fa-${role==='user'?'user':'book'}"></i></div><div class="message-content">${html}</div>`;
-          messages.appendChild(div);
-          chatArea.scrollTop = chatArea.scrollHeight;
-        }
+            </div>
 
-        function handleMessage(text){
-          if(!text.trim()) return;
-          addMsg("user", text);
-          input.value="";
-          setTimeout(()=>{
-            let reply = "Main aapki is baat me madad kar sakta hun: Udhar, Jama, Hisab, Backup. In me se koi lafz likh ke bhejein.";
-            let low = text.toLowerCase();
-            for(let k in knowledge){ if(low.includes(k)){ reply = knowledge[k]; break; } }
-            addMsg("ai", reply);
-          }, 400);
-        }
 
-        sendBtn.onclick = () => handleMessage(input.value);
-        input.addEventListener("keydown", e=>{ if(e.key==="Enter" &&!e.shiftKey){ e.preventDefault(); handleMessage(input.value); }});
-        document.querySelectorAll("[data-prompt], [data-q]").forEach(b=> b.onclick = ()=> handleMessage(b.dataset.prompt || b.dataset.q));
-        newChatBtn.onclick = ()=>{ messages.innerHTML=""; welcome.style.display="block"; };
-    </script>
+            <div class="connection">
+
+                <span class="status-dot"></span>
+
+                <span>Local</span>
+
+            </div>
+
+        </header>
+
+
+        <!-- CHAT -->
+        <section class="chat-area">
+
+            <!-- WELCOME -->
+            <div class="welcome" id="welcome">
+
+                <div class="welcome-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+
+                <h2>Assalam-o-Alaikum, Wahab 👋</h2>
+
+                <p>
+                    Main <strong>WahabGPT</strong> hoon —
+                    tumhara personal local AI assistant.
+                </p>
+
+                <div class="welcome-line"></div>
+
+                <div class="quick-actions">
+
+                    <button data-prompt="Tell me about myself">
+                        <i class="fa-solid fa-user"></i>
+                        About Me
+                    </button>
+
+                    <button data-prompt="Tell me about my projects">
+                        <i class="fa-solid fa-folder"></i>
+                        My Projects
+                    </button>
+
+                    <button data-prompt="Help me with coding">
+                        <i class="fa-solid fa-code"></i>
+                        Coding Help
+                    </button>
+
+                    <button data-prompt="What can you help me with?">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        What Can You Do?
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGES -->
+            <div id="messages" class="messages"></div>
+
+        </section>
+
+
+        <!-- INPUT -->
+        <div class="input-area">
+
+            <div class="input-paper">
+
+                <textarea
+                    id="messageInput"
+                    rows="1"
+                    placeholder="Apna message likhein..."
+                    autocomplete="off"
+                ></textarea>
+
+
+                <button
+                    id="sendButton"
+                    class="send-button"
+                    title="Send"
+                >
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+
+            </div>
+
+            <div class="input-hint">
+                <span>
+                    <i class="fa-solid fa-keyboard"></i>
+                    Enter to send
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-lock"></i>
+                    Local Ollama AI
+                </span>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
